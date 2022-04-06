@@ -18,6 +18,7 @@
 
 #hero-section {
   background-color: #f1f3ff;
+  margin-top: 78px;
 }
 
 .content-hero {
@@ -114,4 +115,15 @@
   padding: 1.5rem 0;
   border-radius: 10px;
   border: 1px solid #d0d0d0;
+}
+
+#footer-section p {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 20px;
+  margin-bottom: 1rem;
+}
+
+#footer-section img {
+  margin-right: 1rem;
 }

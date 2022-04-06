@@ -19,7 +19,7 @@ function Home() {
       {/* Navbar */}
       <section id="navbar">
         <div className="container-fluid m-0 p-0">
-          <nav className="navbar navbar-expand-lg navbar-light">
+          <nav className="navbar navbar-expand-lg navbar-light fixed-top">
             <a className="navbar-brand" href="#">
               BinarCar
             </a>
@@ -202,6 +202,40 @@ function Home() {
                   Cari Mobil
                 </a>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* footer-section */}
+      <div id="footer-section">
+        <div className="container py-5 mt-5">
+          <div className="row">
+            <div className="col-md-4">
+              <p className="w-75">
+                Jalan Suroyo No. 161 Mayangan Kota Probolonggo 672000
+              </p>
+              <p>binarcarrental@gmail.com</p>
+              <p>081-233-334-808</p>
+            </div>
+            <div className="col-md-2">
+              <p className="font-weight-bold">Our services</p>
+              <p className="font-weight-bold">Why Us</p>
+              <p className="font-weight-bold">Testimonial</p>
+              <p className="font-weight-bold">FAQ</p>
+            </div>
+            <div className="col-md-3">
+              <p>Connect with us</p>
+              <div>
+                <img src="./img/icon_facebook.png" alt="icon" />
+                <img src="./img/icon_instagram.png" alt="icon" />
+                <img src="./img/icon_twitter.png" alt="icon" />
+                <img src="./img/icon_mail.png" alt="icon" />
+                <img src="./img/icon_twitch.png" alt="icon" />
+              </div>
+            </div>
+            <div className="col-md-3">
+              <p>Copyright Binar 2022</p>
             </div>
           </div>
         </div>
