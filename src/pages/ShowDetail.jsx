@@ -1,14 +1,29 @@
-import React, { useState } from "react";
-import "./Home.css";
-import { MdPeopleOutline } from "react-icons/md";
-import "react-datepicker/dist/react-datepicker.css";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import CardDetail from "../components/CardDetail";
+import { useParams } from "react-router";
+import axios from "axios";
+import { MdOutlineDateRange, MdPeopleOutline } from "react-icons/md";
+import { FiSettings } from "react-icons/fi";
 
-function Home() {
-  const [data, setData] = useState("");
-  const changeData = (e) => {
-    setData(e.target.value);
+function ShowDetail() {
+  const params = useParams();
+  const [carData, setCarData] = useState([]);
+
+  const getData = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3005/cars/${params.id}`
+      );
+      setCarData(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
+
+  useEffect(() => {
+    getData();
+  }, []);
+  console.log(carData);
   return (
     <>
       {/* Navbar */}
@@ -58,23 +73,7 @@ function Home() {
       {/* hero-section */}
       <section id="hero-section">
         <div className="container-fluid p-0 m-0 pt-5">
-          <div className="row m-0 p-0">
-            <div className="col-lg-6 d-flex flex-column justify-content-center align-items-center">
-              <div className="content-hero">
-                <h1 className="heading-hero">
-                  Sewa & Rental Mobil Terbaik di kawasan (Lokasimu)
-                </h1>
-                <p className="desc-hero">
-                  Selamat datang di Binar Car Rental. Kami menyediakan mobil
-                  kualitas terbaik dengan harga terjangkau. Selalu siap melayani
-                  kebutuhanmu untuk sewa mobil selama 24 jam.
-                </p>
-              </div>
-            </div>
-            <div className="col-lg-6">
-              <img className="w-100" src="./img/img_car.png" alt="img-car" />
-            </div>
-          </div>
+          <div className="py-5"></div>
         </div>
       </section>
 
@@ -85,10 +84,7 @@ function Home() {
             <div className="col-lg-12 d-flex justify-content-center content-search">
               <div className="item-search">
                 <p className="category">Tipe Driver</p>
-                <select
-                  className="form-control btn-driver"
-                  onChange={changeData}
-                >
+                <select className="form-control btn-driver">
                   <option value="null">Pilih Tipe Driver</option>
                   <option value="true">Dengan Sopir</option>
                   <option value="false">Tanpa Sopir (Lepas Kunci)</option>
@@ -100,7 +96,7 @@ function Home() {
                 <div className="btn-date">
                   <input
                     type="date"
-                    className="form-control px-2"
+                    className="form-control px-2 clickable"
                     placeholder="Pilih Tanggal"
                   />
                 </div>
@@ -135,10 +131,85 @@ function Home() {
                   </label>
                 </form>
               </div>
-              <div className="button-search">
-                <Link className="btn" to={`/search-result/${data}`}>
-                  Cari Mobil
-                </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* show-detail */}
+      <div id="show-detail">
+        <div className="container p-0">
+          <div className="row">
+            <div className="col-lg-8">
+              <p class="font-weight-bold my-3">Tentang Paket</p>
+              <p>Include</p>
+              <ul>
+                <li>Apa saja yang termasuk dalam paket misal derasi 12 jam </li>
+                <li>Sudah termasuk bensin selama 12 jam</li>
+                <li>Sudah termasuk Tiket Wisata</li>
+                <li>Sudah termasuk pajak</li>
+              </ul>
+
+              <p>Exclude</p>
+              <ul>
+                <li>Tidak termasuk biaya makan sopir Rp 75.000/hari</li>
+                <li>
+                  Jika overtime lebih dari 12 jam akan ada tambahan biaya Rp
+                  20.000/jam
+                </li>
+                <li>Tidak termasuk akomodasi penginapan</li>
+              </ul>
+              <p class="font-weight-bold">Refund, Reschedule, Overtime</p>
+              <ul>
+                <li>Tidak termasuk biaya makan sopir Rp 75.000/hari</li>
+                <li>
+                  Jika overtime lebih dari 12 jam akan ada tambahan biaya Rp
+                  20.000/jam
+                </li>
+                <li>Tidak termasuk akomodasi penginapan</li>
+                <li>Tidak termasuk biaya makan sopir Rp 75.000/hari</li>
+                <li>
+                  Jika overtime lebih dari 12 jam akan ada tambahan biaya RP
+                  20.000/jam
+                </li>
+                <li>Tidak termasuk akomodasi penginapan</li>
+                <li>Tidak termasuk biaya makan sopir 75.000/hari</li>
+                <li>
+                  Jika overtime lebih dari 12 jam akan ada tambahan biaya Rp
+                  20.000/jam
+                </li>
+                <li>Tidak termasuk akomodasi penginapan</li>
+              </ul>
+            </div>
+            <div className="col-lg-4">
+              {/* <CardDetail carData={carData} /> */}
+              <div
+                className="card mt-4"
+                style={{ maxWidth: "22rem" }}
+                //   onClick={() => showDetail(item)}
+              >
+                <img src="" className="w-100 h-50" alt="..." />
+                <div className="card-body">
+                  <p className="mb-1 font-weight-bold">{carData.name}</p>
+                  <div className="d-flex">
+                    <div className="card-detail">
+                      <MdPeopleOutline /> <p>4 orang</p>
+                    </div>
+                    <div className="card-detail">
+                      <FiSettings /> <p>Manual</p>
+                    </div>
+                    <div className="card-detail">
+                      <MdOutlineDateRange /> <p>Tahun 2020</p>
+                    </div>
+                  </div>
+                  <div className="d-flex justify-content-between mt-4 mb-3">
+                    <p>Total</p>
+                    <p className="font-weight-bold">Rp. 120000</p>
+                  </div>
+                  <a href="#" className="btn btn-primary w-100">
+                    Pilih Mobil
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -182,4 +253,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default ShowDetail;

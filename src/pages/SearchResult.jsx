@@ -1,14 +1,49 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Home.css";
 import { MdPeopleOutline } from "react-icons/md";
 import "react-datepicker/dist/react-datepicker.css";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { useParams } from "react-router";
+import Cards from "../components/Cards";
+import "./SearchResult.css";
 
-function Home() {
-  const [data, setData] = useState("");
+function SearchResult() {
+  const [data, setData] = useState(null);
+  const [carData, setCarData] = useState([]);
+  const params = useParams();
+
+  const getData = async (type) => {
+    try {
+      const response = await axios.get("http://localhost:3005/cars");
+      if (type === null) {
+        setCarData(response.data);
+      } else {
+        setCarData(response.data.filter((item) => item.status === type));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const changeData = (e) => {
     setData(e.target.value);
   };
+
+  useEffect(() => {
+    if (params.data === "true") {
+      getData(true);
+    } else if (params.data === "false") {
+      getData(false);
+    } else {
+      getData(null);
+    }
+  }, []);
+
+  // const showDetail = (value) => {
+  //   var myJSON = JSON.stringify(value);
+  //   setCek(myJSON);
+  // };
+
   return (
     <>
       {/* Navbar */}
@@ -58,23 +93,7 @@ function Home() {
       {/* hero-section */}
       <section id="hero-section">
         <div className="container-fluid p-0 m-0 pt-5">
-          <div className="row m-0 p-0">
-            <div className="col-lg-6 d-flex flex-column justify-content-center align-items-center">
-              <div className="content-hero">
-                <h1 className="heading-hero">
-                  Sewa & Rental Mobil Terbaik di kawasan (Lokasimu)
-                </h1>
-                <p className="desc-hero">
-                  Selamat datang di Binar Car Rental. Kami menyediakan mobil
-                  kualitas terbaik dengan harga terjangkau. Selalu siap melayani
-                  kebutuhanmu untuk sewa mobil selama 24 jam.
-                </p>
-              </div>
-            </div>
-            <div className="col-lg-6">
-              <img className="w-100" src="./img/img_car.png" alt="img-car" />
-            </div>
-          </div>
+          <div className="py-5"></div>
         </div>
       </section>
 
@@ -100,7 +119,7 @@ function Home() {
                 <div className="btn-date">
                   <input
                     type="date"
-                    className="form-control px-2"
+                    className="form-control px-2 clickable"
                     placeholder="Pilih Tanggal"
                   />
                 </div>
@@ -135,15 +154,20 @@ function Home() {
                   </label>
                 </form>
               </div>
-              <div className="button-search">
-                <Link className="btn" to={`/search-result/${data}`}>
-                  Cari Mobil
-                </Link>
+              <div className="d-flex align-items-end">
+                <div className="button-cari">
+                  <a className="text-edit" href={`/search-result/${data}`}>
+                    Edit
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      {/* search-result */}
+      <Cards cardData={carData} />
 
       {/* footer-section */}
       <div id="footer-section">
@@ -182,4 +206,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default SearchResult;

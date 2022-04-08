@@ -1,0 +1,15 @@
+.button-cari a {
+  text-decoration: none;
+  border: solid 2px blue;
+  width: 51px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.text-edit {
+  font-size: 14px;
+  font-weight: bold;
+  color: blue;
+}

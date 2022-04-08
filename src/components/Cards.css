@@ -1,0 +1,15 @@
+.card-text {
+  margin-bottom: 1rem;
+  font-size: 14px;
+}
+.card-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.card-info p {
+  margin-left: 0.5rem;
+}

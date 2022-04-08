@@ -91,7 +91,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 6px;
+  margin-top: 0.5rem;
   margin-bottom: 0 !important;
 }
 
@@ -126,4 +126,44 @@
 
 #footer-section img {
   margin-right: 1rem;
+}
+
+.btn-driver,
+.btn-date,
+.btn-time {
+  appearance: none;
+}
+
+.btn-driver + .fa-solid {
+  float: right;
+  margin-top: -28px;
+  margin-right: 10px;
+  color: black !important;
+  padding-right: 5px;
+}
+
+.btn-date + .fa-regular {
+  float: right;
+  margin-top: -28px;
+  margin-right: 10px;
+  color: black !important;
+  padding-right: 5px;
+}
+
+.btn-time + .fa-regular {
+  float: right;
+  margin-top: -28px;
+  margin-right: 10px;
+  color: black !important;
+  padding-right: 5px;
+}
+
+.form-control {
+  font-size: 12px;
+  height: 40px;
+  width: 210px;
+  border-radius: 0;
+}
+.text:hover {
+  background-color: #5cb85f;
 }
