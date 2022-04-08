@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import SearchResult from "./pages/SearchResult";
 import ShowDetail from "./pages/ShowDetail";
+import { useParams } from "react-router";
 
 function App() {
   return (
