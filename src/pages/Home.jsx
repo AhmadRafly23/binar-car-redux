@@ -5,10 +5,12 @@ import "react-datepicker/dist/react-datepicker.css";
 import { Link } from "react-router-dom";
 
 function Home() {
-  const [data, setData] = useState("");
+  const [data, setData] = useState(null);
   const changeData = (e) => {
     setData(e.target.value);
   };
+
+  console.log(data);
   return (
     <>
       {/* Navbar */}
@@ -165,11 +167,41 @@ function Home() {
             <div className="col-md-3">
               <p>Connect with us</p>
               <div>
-                <img src="./img/icon_facebook.png" alt="icon" />
-                <img src="./img/icon_instagram.png" alt="icon" />
-                <img src="./img/icon_twitter.png" alt="icon" />
-                <img src="./img/icon_mail.png" alt="icon" />
-                <img src="./img/icon_twitch.png" alt="icon" />
+                <a href="https://imgbb.com/">
+                  <img
+                    src="https://i.ibb.co/HDLm5Gk/icon-facebook.png"
+                    alt="icon-facebook"
+                    border="0"
+                  />
+                </a>
+                <a href="https://imgbb.com/">
+                  <img
+                    src="https://i.ibb.co/bsJjK8F/icon-instagram.png"
+                    alt="icon-instagram"
+                    border="0"
+                  />
+                </a>
+                <a href="https://imgbb.com/">
+                  <img
+                    src="https://i.ibb.co/jLjDcp2/icon-mail.png"
+                    alt="icon-mail"
+                    border="0"
+                  />
+                </a>
+                <a href="https://imgbb.com/">
+                  <img
+                    src="https://i.ibb.co/t2B4XC6/icon-twitch.png"
+                    alt="icon-twitch"
+                    border="0"
+                  />
+                </a>
+                <a href="https://imgbb.com/">
+                  <img
+                    src="https://i.ibb.co/Tmqs9XX/icon-twitter.png"
+                    alt="icon-twitter"
+                    border="0"
+                  />
+                </a>
               </div>
             </div>
             <div className="col-md-3">

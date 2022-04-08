@@ -13,3 +13,8 @@
 .card-info p {
   margin-left: 0.5rem;
 }
+
+.img-card {
+  object-fit: cover;
+  height: 13rem;
+}

@@ -3,15 +3,15 @@ import "./Home.css";
 import { MdPeopleOutline } from "react-icons/md";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import Cards from "../components/Cards";
 import "./SearchResult.css";
+import { Link } from "react-router-dom";
 
 function SearchResult() {
   const [data, setData] = useState(null);
   const [carData, setCarData] = useState([]);
   const params = useParams();
-
   const getData = async (type) => {
     try {
       const response = await axios.get("http://localhost:3005/cars");
@@ -37,12 +37,7 @@ function SearchResult() {
     } else {
       getData(null);
     }
-  }, []);
-
-  // const showDetail = (value) => {
-  //   var myJSON = JSON.stringify(value);
-  //   setCek(myJSON);
-  // };
+  }, [carData]);
 
   return (
     <>
@@ -50,9 +45,9 @@ function SearchResult() {
       <section id="navbar">
         <div className="container-fluid m-0 p-0">
           <nav className="navbar navbar-expand-lg navbar-light fixed-top">
-            <a className="navbar-brand" href="#">
+            <Link className="navbar-brand" to={"/"}>
               BinarCar
-            </a>
+            </Link>
             <button
               className="navbar-toggler"
               type="button"
@@ -156,9 +151,12 @@ function SearchResult() {
               </div>
               <div className="d-flex align-items-end">
                 <div className="button-cari">
-                  <a className="text-edit" href={`/search-result/${data}`}>
+                  {/* <a className="text-edit" href={`/search-result/${data}`}>
                     Edit
-                  </a>
+                  </a> */}
+                  <Link to={`/search-result/${data}`} className="text-edit">
+                    Edit
+                  </Link>
                 </div>
               </div>
             </div>
@@ -188,13 +186,41 @@ function SearchResult() {
             </div>
             <div className="col-md-3">
               <p>Connect with us</p>
-              <div>
-                <img src="./img/icon_facebook.png" alt="icon" />
-                <img src="./img/icon_instagram.png" alt="icon" />
-                <img src="./img/icon_twitter.png" alt="icon" />
-                <img src="./img/icon_mail.png" alt="icon" />
-                <img src="./img/icon_twitch.png" alt="icon" />
-              </div>
+              <a href="https://imgbb.com/">
+                <img
+                  src="https://i.ibb.co/HDLm5Gk/icon-facebook.png"
+                  alt="icon-facebook"
+                  border="0"
+                />
+              </a>
+              <a href="https://imgbb.com/">
+                <img
+                  src="https://i.ibb.co/bsJjK8F/icon-instagram.png"
+                  alt="icon-instagram"
+                  border="0"
+                />
+              </a>
+              <a href="https://imgbb.com/">
+                <img
+                  src="https://i.ibb.co/jLjDcp2/icon-mail.png"
+                  alt="icon-mail"
+                  border="0"
+                />
+              </a>
+              <a href="https://imgbb.com/">
+                <img
+                  src="https://i.ibb.co/t2B4XC6/icon-twitch.png"
+                  alt="icon-twitch"
+                  border="0"
+                />
+              </a>
+              <a href="https://imgbb.com/">
+                <img
+                  src="https://i.ibb.co/Tmqs9XX/icon-twitter.png"
+                  alt="icon-twitter"
+                  border="0"
+                />
+              </a>
             </div>
             <div className="col-md-3">
               <p>Copyright Binar 2022</p>

@@ -9,15 +9,11 @@ function Cards({ cardData }) {
     <>
       <div className="container p-0 mt-5">
         <div className="row">
-          <div className="col-lg-12 d-flex flex-wrap">
+          <div className="col-lg-12 d-flex justify-content-center flex-wrap">
             {cardData.map((item) => {
               return (
-                <div
-                  className="card mr-3 pb-5"
-                  style={{ maxWidth: "22rem" }}
-                  //   onClick={() => showDetail(item)}
-                >
-                  <img src={item.image} className="w-100 h-50" alt="..." />
+                <div className="card mr-3 mb-3" style={{ maxWidth: "22rem" }}>
+                  <img src={item.image} className="img-card" alt="..." />
                   <div className="card-body">
                     <p className="card-text font-weight-bold">{item.name}</p>
                     <p className="card-text font-weight-bold">

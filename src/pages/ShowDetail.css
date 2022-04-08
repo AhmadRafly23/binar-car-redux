@@ -1,0 +1,9 @@
+.card-detail {
+  display: flex;
+  align-items: center;
+  margin-right: 0.5rem;
+}
+
+.card-detail p {
+  margin-left: 0.5rem;
+}

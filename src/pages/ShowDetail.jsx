@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import CardDetail from "../components/CardDetail";
 import { useParams } from "react-router";
 import axios from "axios";
 import { MdOutlineDateRange, MdPeopleOutline } from "react-icons/md";
 import { FiSettings } from "react-icons/fi";
+import "./ShowDetail.css";
+import { Link } from "react-router-dom";
 
 function ShowDetail() {
   const params = useParams();
@@ -30,9 +31,9 @@ function ShowDetail() {
       <section id="navbar">
         <div className="container-fluid m-0 p-0">
           <nav className="navbar navbar-expand-lg navbar-light fixed-top">
-            <a className="navbar-brand" href="#">
+            <Link className="navbar-brand" to={"/"}>
               BinarCar
-            </a>
+            </Link>
             <button
               className="navbar-toggler"
               type="button"
@@ -143,7 +144,7 @@ function ShowDetail() {
             <div className="col-lg-8">
               <p class="font-weight-bold my-3">Tentang Paket</p>
               <p>Include</p>
-              <ul>
+              <ul className="ml-3">
                 <li>Apa saja yang termasuk dalam paket misal derasi 12 jam </li>
                 <li>Sudah termasuk bensin selama 12 jam</li>
                 <li>Sudah termasuk Tiket Wisata</li>
@@ -151,7 +152,7 @@ function ShowDetail() {
               </ul>
 
               <p>Exclude</p>
-              <ul>
+              <ul className="ml-3">
                 <li>Tidak termasuk biaya makan sopir Rp 75.000/hari</li>
                 <li>
                   Jika overtime lebih dari 12 jam akan ada tambahan biaya Rp
@@ -160,7 +161,7 @@ function ShowDetail() {
                 <li>Tidak termasuk akomodasi penginapan</li>
               </ul>
               <p class="font-weight-bold">Refund, Reschedule, Overtime</p>
-              <ul>
+              <ul className="ml-3">
                 <li>Tidak termasuk biaya makan sopir Rp 75.000/hari</li>
                 <li>
                   Jika overtime lebih dari 12 jam akan ada tambahan biaya Rp
@@ -182,13 +183,8 @@ function ShowDetail() {
               </ul>
             </div>
             <div className="col-lg-4">
-              {/* <CardDetail carData={carData} /> */}
-              <div
-                className="card mt-4"
-                style={{ maxWidth: "22rem" }}
-                //   onClick={() => showDetail(item)}
-              >
-                <img src="" className="w-100 h-50" alt="..." />
+              <div className="card mt-4" style={{ maxWidth: "22rem" }}>
+                <img src={carData.image} className="w-100 h-50" alt="..." />
                 <div className="card-body">
                   <p className="mb-1 font-weight-bold">{carData.name}</p>
                   <div className="d-flex">
@@ -202,9 +198,9 @@ function ShowDetail() {
                       <MdOutlineDateRange /> <p>Tahun 2020</p>
                     </div>
                   </div>
-                  <div className="d-flex justify-content-between mt-4 mb-3">
+                  <div className="d-flex justify-content-between my-3">
                     <p>Total</p>
-                    <p className="font-weight-bold">Rp. 120000</p>
+                    <p className="font-weight-bold">Rp. {carData.price}</p>
                   </div>
                   <a href="#" className="btn btn-primary w-100">
                     Pilih Mobil
@@ -236,11 +232,41 @@ function ShowDetail() {
             <div className="col-md-3">
               <p>Connect with us</p>
               <div>
-                <img src="./img/icon_facebook.png" alt="icon" />
-                <img src="./img/icon_instagram.png" alt="icon" />
-                <img src="./img/icon_twitter.png" alt="icon" />
-                <img src="./img/icon_mail.png" alt="icon" />
-                <img src="./img/icon_twitch.png" alt="icon" />
+                <a href="https://imgbb.com/">
+                  <img
+                    src="https://i.ibb.co/HDLm5Gk/icon-facebook.png"
+                    alt="icon-facebook"
+                    border="0"
+                  />
+                </a>
+                <a href="https://imgbb.com/">
+                  <img
+                    src="https://i.ibb.co/bsJjK8F/icon-instagram.png"
+                    alt="icon-instagram"
+                    border="0"
+                  />
+                </a>
+                <a href="https://imgbb.com/">
+                  <img
+                    src="https://i.ibb.co/jLjDcp2/icon-mail.png"
+                    alt="icon-mail"
+                    border="0"
+                  />
+                </a>
+                <a href="https://imgbb.com/">
+                  <img
+                    src="https://i.ibb.co/t2B4XC6/icon-twitch.png"
+                    alt="icon-twitch"
+                    border="0"
+                  />
+                </a>
+                <a href="https://imgbb.com/">
+                  <img
+                    src="https://i.ibb.co/Tmqs9XX/icon-twitter.png"
+                    alt="icon-twitter"
+                    border="0"
+                  />
+                </a>
               </div>
             </div>
             <div className="col-md-3">
