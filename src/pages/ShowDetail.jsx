@@ -1,30 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router";
-import axios from "axios";
 import { MdOutlineDateRange, MdPeopleOutline } from "react-icons/md";
 import { FiSettings } from "react-icons/fi";
 import "./ShowDetail.css";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { detailCar } from "../redux/actions/carActions";
 
 function ShowDetail() {
-  const params = useParams();
-  const [carData, setCarData] = useState([]);
-
-  const getData = async () => {
-    try {
-      const response = await axios.get(
-        `http://localhost:3005/cars/${params.id}`
-      );
-      setCarData(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const { detailCarLoading, detailCarResult, detailCarError } = useSelector(
+    (state) => state.detailCars
+  );
 
   useEffect(() => {
-    getData();
+    dispatch(detailCar(id));
+    // eslint-disable-next-line
   }, []);
-  console.log(carData);
+
   return (
     <>
       {/* Navbar */}
@@ -50,19 +44,19 @@ function ShowDetail() {
               id="navbarNavAltMarkup"
             >
               <div className="navbar-nav">
-                <a className="nav-link mr-4" href="#">
+                <a className="nav-link mr-4" href="#/">
                   Our Services
                 </a>
-                <a className="nav-link mr-4" href="#">
+                <a className="nav-link mr-4" href="#/">
                   Why Us
                 </a>
-                <a className="nav-link mr-4" href="#">
+                <a className="nav-link mr-4" href="#/">
                   Testimonial
                 </a>
-                <a className="nav-link mr-4" href="#">
+                <a className="nav-link mr-4" href="#/">
                   FAQ
                 </a>
-                <a className="nav-link btn" href="#">
+                <a className="nav-link btn" href="#/">
                   Register
                 </a>
               </div>
@@ -183,30 +177,44 @@ function ShowDetail() {
               </ul>
             </div>
             <div className="col-lg-4">
-              <div className="card mt-4" style={{ maxWidth: "22rem" }}>
-                <img src={carData.image} className="w-100 h-50" alt="..." />
-                <div className="card-body">
-                  <p className="mb-1 font-weight-bold">{carData.name}</p>
-                  <div className="d-flex">
-                    <div className="card-detail">
-                      <MdPeopleOutline /> <p>4 orang</p>
+              {detailCarResult ? (
+                <div className="card mt-4" style={{ maxWidth: "22rem" }}>
+                  <img
+                    src={detailCarResult.image}
+                    className="w-100 h-50"
+                    alt="..."
+                  />
+                  <div className="card-body">
+                    <p className="mb-1 font-weight-bold">
+                      {detailCarResult.name}
+                    </p>
+                    <div className="d-flex">
+                      <div className="card-detail">
+                        <MdPeopleOutline /> <p>4 orang</p>
+                      </div>
+                      <div className="card-detail">
+                        <FiSettings /> <p>Manual</p>
+                      </div>
+                      <div className="card-detail">
+                        <MdOutlineDateRange /> <p>Tahun 2020</p>
+                      </div>
                     </div>
-                    <div className="card-detail">
-                      <FiSettings /> <p>Manual</p>
+                    <div className="d-flex justify-content-between my-3">
+                      <p>Total</p>
+                      <p className="font-weight-bold">
+                        Rp. {detailCarResult.price}
+                      </p>
                     </div>
-                    <div className="card-detail">
-                      <MdOutlineDateRange /> <p>Tahun 2020</p>
-                    </div>
+                    <a href="#/" className="btn btn-primary w-100">
+                      Pilih Mobil
+                    </a>
                   </div>
-                  <div className="d-flex justify-content-between my-3">
-                    <p>Total</p>
-                    <p className="font-weight-bold">Rp. {carData.price}</p>
-                  </div>
-                  <a href="#" className="btn btn-primary w-100">
-                    Pilih Mobil
-                  </a>
                 </div>
-              </div>
+              ) : detailCarLoading ? (
+                <p>Loading...</p>
+              ) : (
+                <p>{detailCarError ? detailCarError : "Data Kosong"}</p>
+              )}
             </div>
           </div>
         </div>

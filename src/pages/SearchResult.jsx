@@ -1,43 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./Home.css";
 import { MdPeopleOutline } from "react-icons/md";
 import "react-datepicker/dist/react-datepicker.css";
-import axios from "axios";
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 import Cards from "../components/Cards";
 import "./SearchResult.css";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { filterData, setCars } from "../redux/actions/carActions";
 
 function SearchResult() {
-  const [data, setData] = useState(null);
-  const [carData, setCarData] = useState([]);
-  const params = useParams();
-  const getData = async (type) => {
-    try {
-      const response = await axios.get("http://localhost:3005/cars");
-      if (type === null) {
-        setCarData(response.data);
-      } else {
-        setCarData(response.data.filter((item) => item.status === type));
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const changeData = (e) => {
-    setData(e.target.value);
-  };
+  const { data } = useParams();
+  const dispatch = useDispatch();
+  const filter = useSelector((state) => state.filterData.data);
 
   useEffect(() => {
-    if (params.data === "true") {
-      getData(true);
-    } else if (params.data === "false") {
-      getData(false);
-    } else {
-      getData(null);
-    }
-  }, [carData]);
+    dispatch(setCars(data));
+    // eslint-disable-next-line
+  }, [data]);
 
   return (
     <>
@@ -52,7 +32,7 @@ function SearchResult() {
               className="navbar-toggler"
               type="button"
               data-toggle="collapse"
-              data-target="#navbarNavAltMarkup"
+              data-target="#/navbarNavAltMarkup"
               aria-controls="navbarNavAltMarkup"
               aria-expanded="false"
               aria-label="Toggle navigation"
@@ -64,19 +44,19 @@ function SearchResult() {
               id="navbarNavAltMarkup"
             >
               <div className="navbar-nav">
-                <a className="nav-link mr-4" href="#">
+                <a className="nav-link mr-4" href="#/">
                   Our Services
                 </a>
-                <a className="nav-link mr-4" href="#">
+                <a className="nav-link mr-4" href="#/">
                   Why Us
                 </a>
-                <a className="nav-link mr-4" href="#">
+                <a className="nav-link mr-4" href="#/">
                   Testimonial
                 </a>
-                <a className="nav-link mr-4" href="#">
+                <a className="nav-link mr-4" href="#/">
                   FAQ
                 </a>
-                <a className="nav-link btn" href="#">
+                <a className="nav-link btn" href="#/">
                   Register
                 </a>
               </div>
@@ -101,7 +81,10 @@ function SearchResult() {
                 <p className="category">Tipe Driver</p>
                 <select
                   className="form-control btn-driver"
-                  onChange={changeData}
+                  onChange={(e) => {
+                    const datas = e.target.value;
+                    return dispatch(filterData(datas));
+                  }}
                 >
                   <option value="null">Pilih Tipe Driver</option>
                   <option value="true">Dengan Sopir</option>
@@ -151,10 +134,7 @@ function SearchResult() {
               </div>
               <div className="d-flex align-items-end">
                 <div className="button-cari">
-                  {/* <a className="text-edit" href={`/search-result/${data}`}>
-                    Edit
-                  </a> */}
-                  <Link to={`/search-result/${data}`} className="text-edit">
+                  <Link to={`/search-result/${filter}`} className="text-edit">
                     Edit
                   </Link>
                 </div>
@@ -165,7 +145,7 @@ function SearchResult() {
       </div>
 
       {/* search-result */}
-      <Cards cardData={carData} />
+      <Cards />
 
       {/* footer-section */}
       <div id="footer-section">

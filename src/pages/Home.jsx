@@ -1,23 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import "./Home.css";
 import { MdPeopleOutline } from "react-icons/md";
 import "react-datepicker/dist/react-datepicker.css";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { filterData, setCars } from "../redux/actions/carActions";
 
 function Home() {
-  const [data, setData] = useState(null);
-  const changeData = (e) => {
-    setData(e.target.value);
-  };
+  const data = useSelector((state) => state.filterData.data);
+  const dispatch = useDispatch();
 
-  console.log(data);
+  useEffect(() => {
+    dispatch(setCars());
+    // eslint-disable-next-line
+  }, []);
+
   return (
     <>
       {/* Navbar */}
       <section id="navbar">
         <div className="container-fluid m-0 p-0">
           <nav className="navbar navbar-expand-lg navbar-light fixed-top">
-            <a className="navbar-brand" href="#">
+            <a className="navbar-brand" href="#/">
               BinarCar
             </a>
             <button
@@ -36,19 +40,19 @@ function Home() {
               id="navbarNavAltMarkup"
             >
               <div className="navbar-nav">
-                <a className="nav-link mr-4" href="#">
+                <a className="nav-link mr-4" href="#/">
                   Our Services
                 </a>
-                <a className="nav-link mr-4" href="#">
+                <a className="nav-link mr-4" href="#/">
                   Why Us
                 </a>
-                <a className="nav-link mr-4" href="#">
+                <a className="nav-link mr-4" href="#/">
                   Testimonial
                 </a>
-                <a className="nav-link mr-4" href="#">
+                <a className="nav-link mr-4" href="#/">
                   FAQ
                 </a>
-                <a className="nav-link btn" href="#">
+                <a className="nav-link btn" href="#/">
                   Register
                 </a>
               </div>
@@ -89,7 +93,10 @@ function Home() {
                 <p className="category">Tipe Driver</p>
                 <select
                   className="form-control btn-driver"
-                  onChange={changeData}
+                  onChange={(e) => {
+                    const data = e.target.value;
+                    dispatch(filterData(data));
+                  }}
                 >
                   <option value="null">Pilih Tipe Driver</option>
                   <option value="true">Dengan Sopir</option>
